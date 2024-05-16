@@ -3,7 +3,7 @@
 const mainContainerElm = document.querySelector(".main__container");
 
 const getPokemon = async function () {
-  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=250`);
+  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=50`);
   const data = await response.json();
 
   const { results } = data;

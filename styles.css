@@ -6,6 +6,7 @@
 }
 
 body {
+  max-height: 100vh;
   color: #f8f9fa;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -24,6 +25,10 @@ img {
 
 .header {
   background-color: red;
+}
+
+.main {
+  overflow-y: scroll;
 }
 
 .footer {
