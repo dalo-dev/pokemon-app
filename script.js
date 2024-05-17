@@ -34,8 +34,35 @@ const getPokemonCard = function (pokemonId) {
     }.png"
     alt="Pokemon"
     />
+    <audio class="pokemon-cry hidden" controls>
+      <source
+        src="https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${
+          pokemonId + 1
+        }.ogg"
+        type="audio/ogg"
+        muted="muted"
+      />
+      Your browser does not support the audio tag.
+    </audio>
    </div>`;
   mainContainerElm.insertAdjacentHTML("beforeend", html);
 };
 
 getPokemon();
+
+mainContainerElm.addEventListener("mouseover", (e) => {
+  if (e.target.closest(".pokemon-card")) {
+    const pokemonCard = e.target.closest(".pokemon-card");
+    const pokemonCry = pokemonCard.querySelector(".pokemon-cry");
+    pokemonCry.play();
+  }
+});
+
+mainContainerElm.addEventListener("mouseout", (e) => {
+  if (e.target.closest(".pokemon-card")) {
+    const pokemonCard = e.target.closest(".pokemon-card");
+    const pokemonCry = pokemonCard.querySelector(".pokemon-cry");
+    pokemonCry.pause();
+    pokemonCry.currentTime = 0;
+  }
+});

@@ -59,13 +59,35 @@ img {
 }
 
 .pokemon-card {
+  cursor: pointer;
   background-color: #6c757d;
-  border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
 
   .pokemon-img {
     width: 180px;
     height: 180px;
+  }
+
+  .pokemon-img:hover {
+    animation: shake 0.5s;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  75% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }
 
