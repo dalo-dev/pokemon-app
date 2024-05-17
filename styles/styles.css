@@ -6,7 +6,7 @@
 }
 
 body {
-  max-height: 100vh;
+  height: 100vh;
   color: #f8f9fa;
   font-family: "Roboto", sans-serif;
   font-style: normal;
@@ -29,6 +29,9 @@ img {
 
 .main {
   overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .footer {
@@ -46,6 +49,7 @@ img {
 .main__container {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
 }
@@ -63,4 +67,8 @@ img {
     width: 180px;
     height: 180px;
   }
+}
+
+.hidden {
+  display: none;
 }
