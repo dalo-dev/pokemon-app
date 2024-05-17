@@ -1,5 +1,7 @@
 "use strict";
 
+let offset = 0;
+
 const loaderElm = document.querySelector(".pokemon");
 const mainContainerElm = document.querySelector(".main__container");
 
@@ -15,13 +17,16 @@ const showLoader = function () {
 
 const getPokemon = async function () {
   showLoader();
-  const response = await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=50`);
+  const response = await fetch(
+    `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=50`
+  );
   const data = await response.json();
-
+  console.log(data);
   const { results } = data;
   results.forEach((_, id) => {
-    getPokemonCard(id);
+    getPokemonCard(id + offset);
   });
+  offset += 50;
   removeLoader();
 };
 
@@ -51,7 +56,7 @@ const getPokemonCard = function (pokemonId) {
 getPokemon();
 
 mainContainerElm.addEventListener("mouseover", (e) => {
-  if (e.target.closest(".pokemon-card")) {
+  if (e.target.classList.contains("pokemon-img")) {
     const pokemonCard = e.target.closest(".pokemon-card");
     const pokemonCry = pokemonCard.querySelector(".pokemon-cry");
     pokemonCry.play();
@@ -59,10 +64,15 @@ mainContainerElm.addEventListener("mouseover", (e) => {
 });
 
 mainContainerElm.addEventListener("mouseout", (e) => {
-  if (e.target.closest(".pokemon-card")) {
+  if (e.target.classList.contains("pokemon-img")) {
     const pokemonCard = e.target.closest(".pokemon-card");
     const pokemonCry = pokemonCard.querySelector(".pokemon-cry");
     pokemonCry.pause();
     pokemonCry.currentTime = 0;
   }
+});
+
+document.querySelector(".main").addEventListener("scroll", function (e) {
+  e.target.scrollTop + e.target.offsetHeight >= e.target.scrollHeight &&
+    getPokemon();
 });

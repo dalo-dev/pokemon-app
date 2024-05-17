@@ -61,6 +61,7 @@ img {
 .pokemon-card {
   cursor: pointer;
   background-color: #6c757d;
+  border: ;
   border-radius: 0.25rem;
 
   .pokemon-img {
