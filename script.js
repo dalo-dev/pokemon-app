@@ -4,6 +4,7 @@ let offset = 0;
 
 const loaderElm = document.querySelector(".overlay");
 const mainContainerElm = document.querySelector(".main__container");
+const pokemonCryElm = document.getElementById("pokemon-cry");
 
 const removeLoader = function () {
   loaderElm.classList.add("hidden");
@@ -14,18 +15,21 @@ const showLoader = function () {
 };
 
 const getPokemon = async function () {
-  showLoader();
-  const response = await fetch(
-    `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=50`
-  );
-  const data = await response.json();
-  console.log(data);
-  const { results } = data;
-  results.forEach((_, id) => {
-    getPokemonCard(id + offset);
-  });
-  offset += 50;
-  removeLoader();
+  if (offset <= 1025) {
+    showLoader();
+    const response = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${
+        offset + 50 > 1025 ? 50 - (1025 - offset) : 50
+      }`
+    );
+    const data = await response.json();
+    const { results } = data;
+    results.forEach((_, id) => {
+      getPokemonCard(id + offset);
+    });
+    offset += 50;
+    removeLoader();
+  }
 };
 
 const getPokemonCard = function (pokemonId) {
@@ -37,16 +41,6 @@ const getPokemonCard = function (pokemonId) {
     }.png"
     alt="Pokemon"
     />
-    <audio class="pokemon-cry hidden" controls>
-      <source
-        src="https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${
-          pokemonId + 1
-        }.ogg"
-        type="audio/ogg"
-        muted="muted"
-      />
-      Your browser does not support the audio tag.
-    </audio>
    </div>`;
   mainContainerElm.insertAdjacentHTML("beforeend", html);
 };
@@ -56,17 +50,16 @@ getPokemon();
 mainContainerElm.addEventListener("mouseover", (e) => {
   if (e.target.classList.contains("pokemon-img")) {
     const pokemonCard = e.target.closest(".pokemon-card");
-    const pokemonCry = pokemonCard.querySelector(".pokemon-cry");
-    pokemonCry.play();
+    pokemonCryElm.src = `https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${pokemonCard.dataset.pokemonid}.ogg`;
+    pokemonCryElm.closest("audio").load();
+    pokemonCryElm.closest("audio").play();
   }
 });
 
 mainContainerElm.addEventListener("mouseout", (e) => {
   if (e.target.classList.contains("pokemon-img")) {
-    const pokemonCard = e.target.closest(".pokemon-card");
-    const pokemonCry = pokemonCard.querySelector(".pokemon-cry");
-    pokemonCry.pause();
-    pokemonCry.currentTime = 0;
+    pokemonCryElm.closest("audio").pause();
+    pokemonCryElm.closest("audio").currentTime = 0;
   }
 });
 
