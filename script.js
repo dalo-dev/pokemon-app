@@ -2,17 +2,15 @@
 
 let offset = 0;
 
-const loaderElm = document.querySelector(".pokemon");
+const loaderElm = document.querySelector(".overlay");
 const mainContainerElm = document.querySelector(".main__container");
 
 const removeLoader = function () {
   loaderElm.classList.add("hidden");
-  mainContainerElm.classList.remove("hidden");
 };
 
 const showLoader = function () {
   loaderElm.classList.remove("hidden");
-  mainContainerElm.classList.add("hidden");
 };
 
 const getPokemon = async function () {

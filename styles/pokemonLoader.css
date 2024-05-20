@@ -2,7 +2,6 @@
 
 .pokemon {
   box-sizing: content-box;
-  position: relative;
   height: 100px;
   width: 100px;
   background: linear-gradient(to bottom, rgb(254, 0, 1) 50%, white 50%);
