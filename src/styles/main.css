@@ -87,38 +87,6 @@ body {
   animation: upAndDown 0.5s infinite step-start;
 }
 
-.modal {
-  padding: 1rem;
-  position: relative;
-  width: 50%;
-  background-color: white;
-  color: black;
-  border-radius: 1rem;
-
-  .pokemon-info {
-    display: flex;
-
-    .pokemon-art {
-      width: 50%;
-
-      img {
-        height: 300px;
-      }
-    }
-  }
-}
-
-.close-modal {
-  position: absolute;
-  top: 0.5rem;
-  right: 1rem;
-  font-size: 2rem;
-  color: #333;
-  cursor: pointer;
-  border: none;
-  background: none;
-}
-
 @keyframes upAndDown {
   0% {
     transform: translateY(0);

@@ -1,6 +1,7 @@
-import { getPokemonCard } from "./html-builder";
+import { getPokemonCard, getPokemonModal } from "./html-builder";
 
 const loaderElm = document.querySelector(".overlay");
+const pokemonModal = document.getElementById("pokemon-modal");
 let offset = 0;
 
 const removeLoader = function () {
@@ -9,6 +10,10 @@ const removeLoader = function () {
 
 const showLoader = function () {
   loaderElm.classList.remove("hidden");
+};
+
+const showModal = function () {
+  pokemonModal.classList.remove("hidden");
 };
 
 export const getPokemonList = async function () {
@@ -30,9 +35,22 @@ export const getPokemonList = async function () {
 };
 
 export const getPokemonInfo = async function (pokemonId) {
-  const response = await fetch(
-    `https://pokeapi.co/api/v2/pokemon/${pokemonId}`
-  );
-  const data = await response.json();
-  console.log(data);
+  showLoader();
+  const [pokemonResponse, speciesResponse] = await Promise.all([
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`),
+    fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonId}`),
+  ]);
+
+  const pokemonData = await pokemonResponse.json();
+  const speciesData = await speciesResponse.json();
+
+  const pokedexDesc = speciesData.flavor_text_entries
+    .filter((entry) => entry.language.name === "en")
+    .at(-1);
+
+  const data = { ...pokemonData, pokedexDesc };
+
+  getPokemonModal(data);
+  showModal();
+  removeLoader();
 };
