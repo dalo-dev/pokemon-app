@@ -17,7 +17,8 @@ export const setupEventListeners = function () {
   closeModalBtn.addEventListener("click", () => {
     pokemonModal.classList.add("hidden");
   });
-  pokemonModal.addEventListener("click", () => {
-    pokemonModal.classList.add("hidden");
+  pokemonModal.addEventListener("click", (e) => {
+    e.target.classList.contains("overlay") &&
+      pokemonModal.classList.add("hidden");
   });
 };

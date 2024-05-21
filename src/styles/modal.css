@@ -35,14 +35,14 @@ th {
 .modal {
   padding: 1rem;
   position: relative;
-  width: 50%;
+  max-width: 700px;
   background-color: white;
   color: black;
   border-radius: 1rem;
 
   .pokemon-info {
     display: flex;
-
+    gap: 2px;
     .pokemon-art {
       img {
         height: 300px;

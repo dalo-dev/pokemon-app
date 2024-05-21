@@ -25,7 +25,7 @@ const getPokemonStatsElms = function (stats) {
       <span>${statsAcronym[element.stat.name]}</span>
       <span>${element.base_stat}</span>
     </td>
-    <td style="width: 200px">
+    <td style="width: 250px">
       <div
         class="bar"
         style="
