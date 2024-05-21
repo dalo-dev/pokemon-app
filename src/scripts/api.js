@@ -1,4 +1,5 @@
-const mainContainerElm = document.querySelector(".main__container");
+import { getPokemonCard } from "./html-builder";
+
 const loaderElm = document.querySelector(".overlay");
 let offset = 0;
 
@@ -10,20 +11,7 @@ const showLoader = function () {
   loaderElm.classList.remove("hidden");
 };
 
-const getPokemonCard = function (pokemonId) {
-  const html = `<div class="pokemon-card" data-pokemonId = "${pokemonId + 1}">
-      <img
-      class="pokemon-img"
-      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-        pokemonId + 1
-      }.png"
-      alt="Pokemon"
-      />
-     </div>`;
-  mainContainerElm.insertAdjacentHTML("beforeend", html);
-};
-
-export const getPokemon = async function () {
+export const getPokemonList = async function () {
   if (offset <= 1025) {
     showLoader();
     const response = await fetch(
@@ -39,4 +27,12 @@ export const getPokemon = async function () {
     offset += 50;
     removeLoader();
   }
+};
+
+export const getPokemonInfo = async function (pokemonId) {
+  const response = await fetch(
+    `https://pokeapi.co/api/v2/pokemon/${pokemonId}`
+  );
+  const data = await response.json();
+  console.log(data);
 };

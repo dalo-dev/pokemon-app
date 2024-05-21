@@ -15,7 +15,7 @@ body {
   grid-template-rows: auto 1fr auto;
 }
 
-img {
+.pixel {
   -ms-interpolation-mode: nearest-neighbor;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: -moz-crisp-edges;
@@ -76,29 +76,55 @@ img {
   cursor: pointer;
   background-color: #6c757d;
   border-radius: 0.25rem;
+}
 
-  .pokemon-img {
-    width: 180px;
-    height: 180px;
-  }
+.pokemon-img {
+  width: 180px;
+  height: 180px;
+}
 
-  .pokemon-img:hover {
-    animation: shake 0.5s;
+.pokemon-img:hover {
+  animation: upAndDown 0.5s infinite step-start;
+}
+
+.modal {
+  padding: 1rem;
+  position: relative;
+  width: 50%;
+  background-color: white;
+  color: black;
+  border-radius: 1rem;
+
+  .pokemon-info {
+    display: flex;
+
+    .pokemon-art {
+      width: 50%;
+
+      img {
+        height: 300px;
+      }
+    }
   }
 }
 
-@keyframes shake {
+.close-modal {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  font-size: 2rem;
+  color: #333;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+@keyframes upAndDown {
   0% {
     transform: translateY(0);
   }
-  25% {
-    transform: translateY(-5px);
-  }
   50% {
-    transform: translateY(5px);
-  }
-  75% {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
   }
   100% {
     transform: translateY(0);
