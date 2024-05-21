@@ -7,20 +7,6 @@ const statsAcronym = {
   speed: "Spd",
 };
 
-export const getPokemonCard = function (pokemonId) {
-  const mainContainerElm = document.querySelector(".main__container");
-  const html = `<div class="pokemon-card" data-pokemonId = "${pokemonId + 1}">
-        <img
-        class="pokemon-img pixel"
-        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-          pokemonId + 1
-        }.png"
-        alt="Pokemon"
-        />
-       </div>`;
-  mainContainerElm.insertAdjacentHTML("beforeend", html);
-};
-
 const getPokemonTypesElms = function (types) {
   let html = "";
   types.forEach((element) => {
@@ -54,9 +40,22 @@ const getPokemonStatsElms = function (stats) {
   return html;
 };
 
+export const getPokemonCard = function (pokemonId) {
+  const mainContainerElm = document.querySelector(".main__container");
+  const html = `<div class="pokemon-card" data-pokemonId = "${pokemonId + 1}">
+        <img
+        class="pokemon-img pixel"
+        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+          pokemonId + 1
+        }.png"
+        alt="Pokemon"
+        />
+       </div>`;
+  mainContainerElm.insertAdjacentHTML("beforeend", html);
+};
+
 export const getPokemonModal = function (pokemon) {
-  const { types, stats } = pokemon;
-  console.log(pokemon);
+  const { types, stats, pokedexDesc } = pokemon;
   const pokemonInfoElm = document.querySelector(".pokemon-info");
   const html = `<figure class="pokemon-art">
   <img
@@ -73,7 +72,7 @@ export const getPokemonModal = function (pokemon) {
   </div>
   <div class="pokemon-desc">
     <p>
-      ${pokemon.pokedexDesc.flavor_text}
+      ${pokedexDesc.flavor_text}
     </p>
   </div>
   <div>
@@ -84,5 +83,5 @@ export const getPokemonModal = function (pokemon) {
     </table>
   </div>
 </div>`;
-  pokemonInfoElm.insertAdjacentHTML("beforeend", html);
+  pokemonInfoElm.innerHTML = html;
 };
