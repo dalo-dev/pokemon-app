@@ -13,7 +13,10 @@ const showLoader = function () {
 };
 
 const showModal = function () {
-  pokemonModal.classList.remove("hidden");
+  pokemonModal.querySelector("img").addEventListener("load", () => {
+    pokemonModal.classList.remove("hidden");
+    removeLoader();
+  });
 };
 
 export const getPokemonList = async function () {
@@ -52,5 +55,4 @@ export const getPokemonInfo = async function (pokemonId) {
 
   getPokemonModal(data);
   showModal();
-  removeLoader();
 };
