@@ -21,8 +21,10 @@ const getPokemonStatsElms = function (stats) {
   let html = "";
   stats.forEach((element) => {
     html += `<tr>
-    <td style="display: flex; justify-content: space-between">
-      <span>${statsAcronym[element.stat.name]}</span>
+    <td>
+      <span>${statsAcronym[element.stat.name]}:</span>
+    </td>
+    <td>
       <span>${element.base_stat}</span>
     </td>
     <td style="width: 250px">
@@ -30,7 +32,8 @@ const getPokemonStatsElms = function (stats) {
         class="bar"
         style="
           width: ${(100 * element.base_stat) / 255}%;
-          height: 20px;
+          height: 15px;
+          border-radius: 1rem;
           background-color: #7ac74c;
         "
       ></div>
@@ -66,13 +69,14 @@ export const getPokemonModal = function (pokemon) {
   />
 </figure>
 <div class="pokemon-description">
-  <h2>#${pokemon.id} - ${pokemon.name}</h2>
+  <h2>#${pokemon.id} - <span class="pokemon-name">${pokemon.name}</span></h2>
   <div class="pokemon-types">
     ${getPokemonTypesElms(types)}
   </div>
   <div class="pokemon-desc">
     <p>
       ${pokedexDesc.flavor_text}
+      <button id="cry-btn">&#9658;</button>
     </p>
   </div>
   <div>
@@ -82,6 +86,18 @@ export const getPokemonModal = function (pokemon) {
       </tbody>
     </table>
   </div>
+  <audio id="pokemon-cry">
+    <source src="https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/${
+      pokemon.id
+    }.ogg" type="audio/ogg" />
+    Your browser does not support the audio tag.
+  </audio>
 </div>`;
   pokemonInfoElm.innerHTML = html;
+
+  document.getElementById("cry-btn").addEventListener("click", () => {
+    document.getElementById("pokemon-cry").pause();
+    document.getElementById("pokemon-cry").currentTime = 0;
+    document.getElementById("pokemon-cry").play();
+  });
 };

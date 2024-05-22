@@ -8,7 +8,9 @@
 body {
   height: 100vh;
   color: #f8f9fa;
-  font-family: "Roboto", sans-serif;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
   font-style: normal;
 
   display: grid;
