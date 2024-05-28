@@ -33,48 +33,71 @@ th {
 }
 
 .modal {
+  margin: 1rem;
   padding: 1rem;
   position: relative;
   max-width: 700px;
   background-color: white;
   color: black;
   border-radius: 1rem;
+}
 
-  .pokemon-info {
+.pokemon-info {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pokemon-art {
+  flex: 1 1 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background-color: #f9f9f9;
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.pokemon-description {
+  flex: 1 1 60%;
+  padding: 20px;
+
+  h2 {
+    font-size: 1.5em;
+  }
+
+  .pokemon-name {
+    text-transform: capitalize;
+  }
+  .pokemon-types {
     display: flex;
-    gap: 2px;
-    .pokemon-art {
-      img {
-        height: 300px;
-      }
-    }
-    .pokemon-description {
-      .pokemon-name {
-        text-transform: capitalize;
-      }
-      .pokemon-types {
-        display: flex;
-        gap: 4px;
-        span {
-          font-weight: 600;
-          text-transform: uppercase;
-          padding: 0.2rem 0.6rem;
-          border-radius: 1rem;
-        }
-      }
-      .pokemon-desc {
-        margin: 0.5rem 0;
-        button {
-          width: 20px;
-          height: 20px;
-          cursor: pointer;
-          border: 1px black solid;
-          padding: 0.2rem;
-          border-radius: 50%;
-        }
-      }
+    gap: 4px;
+    span {
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 1rem;
     }
   }
+  .pokemon-desc {
+    margin: 0.5rem 0;
+    button {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      border: 1px black solid;
+      padding: 0.2rem;
+      border-radius: 50%;
+    }
+  }
+}
+
+.pokemon-types,
+.pokemon-desc,
+.pokemon-stats {
+  margin-top: 10px;
 }
 
 .close-modal {
@@ -86,4 +109,32 @@ th {
   cursor: pointer;
   border: none;
   background: none;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .pokemon-info {
+    flex-direction: column;
+  }
+
+  .pokemon-art,
+  .pokemon-description {
+    flex: 1 1 100%;
+  }
+
+  .pokemon-description {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pokemon-description h2 {
+    font-size: 1.2em;
+  }
+
+  .pokemon-types,
+  .pokemon-desc,
+  .pokemon-stats {
+    margin-top: 5px;
+  }
 }

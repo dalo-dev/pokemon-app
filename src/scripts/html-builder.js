@@ -27,7 +27,7 @@ const getPokemonStatsElms = function (stats) {
     <td>
       <span>${element.base_stat}</span>
     </td>
-    <td style="width: 250px">
+    <td style="width: 50%">
       <div
         class="bar"
         style="
